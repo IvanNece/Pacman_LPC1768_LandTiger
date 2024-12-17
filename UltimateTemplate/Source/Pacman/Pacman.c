@@ -82,9 +82,9 @@ void pacman_update(void) {
 
 		
 		 // Controllo teletrasporto ai bordi
-    if (next_x < 0) {
+    if (next_x <= 0) {
         next_x = WIDTH - 1;  // Teletrasporto a destra
-    } else if (next_x >= WIDTH) {
+    } else if (next_x >= (WIDTH-1)) {
         next_x = 0;  // Teletrasporto a sinistra
     }
 		

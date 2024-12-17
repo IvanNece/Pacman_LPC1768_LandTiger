@@ -7,7 +7,6 @@
 int countdown = 60;  // Countdown iniziale a 60 secondi
 int lives = START_LIVES;
 
-
 int offset_x = (240 - WIDTH * CELL_SIZE) / 2;    // Offset orizzontale centrato
 int offset_y = (320 - HEIGHT * CELL_SIZE) / 2;   // Offset verticale centrato
 
@@ -114,4 +113,13 @@ void display_game_info(void) {
         // Disegna l'icona Pac-Man per ogni vita
         draw_pacman_icon(70 + (i * 20), 310, 8, Yellow);  // Posizione centrata, raggio 8
     }
+}
+
+void display_timer(void) {
+    char timer_str[10]; // Buffer per la stringa
+    sprintf(timer_str, "%02d", countdown); // Converte il valore in stringa
+
+    // Cancella la vecchia scritta e mostra il nuovo countdown
+    GUI_Text(70, 10, (uint8_t *)"    ", TEXT_COLOR, BACKGROUND_COLOR); // Pulisce l'area
+    GUI_Text(70, 10, (uint8_t *)timer_str, TEXT_COLOR, BACKGROUND_COLOR);
 }

@@ -82,11 +82,17 @@ void TIMER0_IRQHandler (void)
 ** Returned value:		None
 **
 ******************************************************************************/
+#include "labyrinth/labyrinth.h"
 void TIMER1_IRQHandler (void)
 {
   /* Match register 0 interrupt service routine */
 	if (LPC_TIM1->IR & 01)
-	{
+	{	//code here
+		if(countdown > 0){
+			countdown--;
+			// Aggiorna il display con il nuovo valore del timer
+			display_timer();
+		}
 		
 		LPC_TIM1->IR = 1;			/* clear interrupt flag */
 	}

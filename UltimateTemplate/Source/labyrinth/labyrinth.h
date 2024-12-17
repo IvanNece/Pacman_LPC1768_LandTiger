@@ -26,6 +26,8 @@
 #define START_LIVES 3
 #define PI 3.14159
 
+extern int countdown;
+
 // Dichiarazione del labirinto
 //extern int labyrinth[HEIGHT][WIDTH];
 
@@ -35,5 +37,6 @@ int return_element(int x, int y);
 void draw_labyrinth(int labyrinth[HEIGHT][WIDTH]);
 void draw_pacman_icon(int x, int y, int radius, uint16_t color);
 void display_game_info(void);
+void display_timer(void);
 
 #endif
