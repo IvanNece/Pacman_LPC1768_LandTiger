@@ -80,6 +80,14 @@ void pacman_update(void) {
             break;
     }
 
+		
+		 // Controllo teletrasporto ai bordi
+    if (next_x < 0) {
+        next_x = WIDTH - 1;  // Teletrasporto a destra
+    } else if (next_x >= WIDTH) {
+        next_x = 0;  // Teletrasporto a sinistra
+    }
+		
     // Calcola la prossima posizione
     switch (pacman_direction) {
         case UP:    next_y--; break;
