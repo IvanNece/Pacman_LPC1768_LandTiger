@@ -22,6 +22,7 @@
 extern int pacman_x;
 extern int pacman_y;
 extern int pacman_direction;
+extern int pacman_desired_direction; 
 
 // Funzioni
 void pacman_init(void);

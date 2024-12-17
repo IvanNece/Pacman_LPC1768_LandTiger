@@ -6,6 +6,8 @@
 int pacman_x;
 int pacman_y;
 int pacman_direction;
+int pacman_desired_direction = STOP;
+
 
 extern volatile int game_paused;
 extern int labyrinth[HEIGHT][WIDTH];
@@ -51,6 +53,32 @@ void pacman_update(void) {
 	
     int next_x = pacman_x;
     int next_y = pacman_y;
+		
+		// Controllo per applicare la direzione desiderata se possibile
+    switch (pacman_desired_direction) {
+        case UP:
+            if (labyrinth[next_y-1][next_x] != WALL) {
+                pacman_direction = UP;  // Aggiorna la direzione effettiva
+            }
+            break;
+        case DOWN:
+            if (labyrinth[next_y+1][next_x] != WALL) {
+                pacman_direction = DOWN;
+            }
+            break;
+        case LEFT:
+            if (labyrinth[next_y][next_x-1] != WALL) {
+                pacman_direction = LEFT;
+            }
+            break;
+        case RIGHT:
+            if (labyrinth[next_y][next_x+1]!= WALL) {
+                pacman_direction = RIGHT;
+            }
+            break;
+        default:
+            break;
+    }
 
     // Calcola la prossima posizione
     switch (pacman_direction) {
@@ -76,5 +104,5 @@ void pacman_update(void) {
 
 // Funzione per cambiare la direzione
 void pacman_set_direction(int new_direction) {
-    pacman_direction = new_direction;
+    pacman_desired_direction = new_direction;
 }
