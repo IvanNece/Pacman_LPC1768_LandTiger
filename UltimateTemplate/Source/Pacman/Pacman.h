@@ -5,7 +5,7 @@
 
 // Definizione delle coordinate iniziali di Pac-Man
 #define PACMAN_START_X 13
-#define PACMAN_START_Y 14
+#define PACMAN_START_Y 12
 
 // Direzioni
 #define STOP 0

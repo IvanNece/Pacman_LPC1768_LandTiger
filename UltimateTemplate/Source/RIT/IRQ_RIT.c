@@ -178,9 +178,9 @@ void RIT_IRQHandler (void)
 					game_paused = !game_paused;
 					if (game_paused) {
 							// Mostra il messaggio di pausa con posizione centrata e dimensioni ristrette
-						  //disable_RIT();
+						  disable_RIT();
 							GUI_Text_Narrow(103, 148, (uint8_t *)"PAUSE", White, Black);
-							//enable_RIT();
+							enable_RIT();
 					} else {
 							// Cancella il messaggio PAUSE con un rettangolo più stretto
 							LCD_ClearWindow(103, 148, 35, 15, Black); // Rettangolo più piccolo
