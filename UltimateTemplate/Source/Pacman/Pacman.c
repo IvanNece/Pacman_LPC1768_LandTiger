@@ -99,11 +99,23 @@ void pacman_update(void) {
     }
 		
     int element = labyrinth[next_y][next_x];
-    if (element != 1) {
+    if (element != WALL) {
         pacman_clear();  // Cancella la posizione precedente
         pacman_x = next_x;
         pacman_y = next_y;
         pacman_draw();   // Disegna Pac-Man nella nuova posizione
+			
+				// Controlla se Pac-Man ha mangiato una pillola
+        if (labyrinth[pacman_y][pacman_x] == STANDARD_PILL) {
+            score += 10;
+            labyrinth[pacman_y][pacman_x] = EMPTY; // Rimuove la pillola
+            display_score();
+        } else if (labyrinth[pacman_y][pacman_x] == POWER_PILL) {
+            score += 50;
+            labyrinth[pacman_y][pacman_x] = EMPTY; // Rimuove la power pill
+            display_score();
+        }
+			
     } else {
         return; 
     }

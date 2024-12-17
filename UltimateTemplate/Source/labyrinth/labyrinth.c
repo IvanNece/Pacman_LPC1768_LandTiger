@@ -2,8 +2,9 @@
 #include "math.h"
 #include "labyrinth.h"
 #include "GLCD/GLCD.h"
+#include "RIT/RIT.h"
 
-//int score = 0;
+int score = 0;
 int countdown = 60;  // Countdown iniziale a 60 secondi
 int lives = START_LIVES;
 
@@ -122,4 +123,18 @@ void display_timer(void) {
     // Cancella la vecchia scritta e mostra il nuovo countdown
     GUI_Text(70, 10, (uint8_t *)"    ", TEXT_COLOR, BACKGROUND_COLOR); // Pulisce l'area
     GUI_Text(70, 10, (uint8_t *)timer_str, TEXT_COLOR, BACKGROUND_COLOR);
+}
+
+void display_score(void) {
+    char score_str[10];
+    sprintf(score_str, "%d", score); // Converte il punteggio in stringa
+
+    // Pulisce la vecchia area dello score
+    LCD_ClearWindow(210, 10, 50, 15, BACKGROUND_COLOR);
+
+    // Mostra lo score aggiornato
+    //GUI_Text(210, 10, (uint8_t *)"SCORE:", TEXT_COLOR, BACKGROUND_COLOR);
+		disable_RIT();
+    GUI_Text(210, 10, (uint8_t *)score_str, TEXT_COLOR, BACKGROUND_COLOR);
+		enable_RIT();
 }
