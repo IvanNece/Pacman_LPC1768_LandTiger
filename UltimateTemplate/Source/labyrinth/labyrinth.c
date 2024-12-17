@@ -45,15 +45,23 @@ void draw_labyrinth(int labyrinth[HEIGHT][WIDTH]) {
                     break;
 
                 case STANDARD_PILL:
-                    // Disegna la pillola standard come un punto centrale
-                    LCD_SetPoint(x + CELL_SIZE / 2, y + CELL_SIZE / 2, PILL_COLOR);
+										// Disegna una pillola standard più spessa e arancione
+                    for (px = -1; px <= 1; px++) {
+                        for (py = -1; py <= 1; py++) {
+                            if (px * px + py * py <= 1) {  // Condizione per rimanere nel cerchio
+                                LCD_SetPoint(x + CELL_SIZE / 2 + px, y + CELL_SIZE / 2 + py, Orange);
+                            }
+                        }
+                    }
                     break;
 
                 case POWER_PILL:
-                    // Disegna la power pill come un quadrato centrale più grande
-                    for (px = -1; px <= 1; px++) {
-                        for (py = -1; py <= 1; py++) {
-                            LCD_SetPoint(x + CELL_SIZE / 2 + px, y + CELL_SIZE / 2 + py, POWER_PILL_COLOR);
+                    // Disegna la power pill più spessa e rossa
+                    for (px = -3; px <= 3; px++) {
+                        for (py = -3; py <= 3; py++) {
+                            if (px * px + py * py <= 9) {  // Condizione per rimanere nel cerchio
+                                LCD_SetPoint(x + CELL_SIZE / 2 + px, y + CELL_SIZE / 2 + py, POWER_PILL_COLOR);
+                            }
                         }
                     }
                     break;
@@ -79,11 +87,20 @@ void draw_pacman_icon(int x, int y, int radius, uint16_t color) {
     for (i = -radius; i <= radius; i++) {
         for (j = -radius; j <= radius; j++) {
             if (i * i + j * j <= radius * radius) {  // Condizione per rimanere nel cerchio
-                float angle = atan2(j, i) * 180 / PI;  // Calcola l'angolo corrente
-                if (angle < 220 && angle > 140) {  // Cancella la fetta (bocca)
+								if(color == EMPTY_COLOR){
+									disable_RIT();
+									LCD_SetPoint(x + i, y + j, color);  // Disegna il pixel
+									enable_RIT();
+								} else {
+									float angle = atan2(j, i) * 180 / PI;  // Calcola l'angolo corrente
+									if (angle < 220 && angle > 140) {  // Cancella la fetta (bocca)
                     continue;
-                }
-                LCD_SetPoint(x + i, y + j, color);  // Disegna il pixel
+                   }
+									disable_RIT();
+                  LCD_SetPoint(x + i, y + j, color);  // Disegna il pixel
+									enable_RIT();
+								}
+                
             }
         }
     }

@@ -22,7 +22,6 @@
 extern int pacman_x;
 extern int pacman_y;
 extern int pacman_direction;
-extern int pacman_desired_direction; 
 
 // Funzioni
 void pacman_init(void);
@@ -30,5 +29,6 @@ void pacman_draw(void);
 void pacman_update(void);  // Aggiorna il movimento
 void pacman_clear(void);   // Cancella Pac-Man nella posizione precedente
 void pacman_set_direction(int new_direction);
+void redraw_cell(int x, int y);
 
 #endif

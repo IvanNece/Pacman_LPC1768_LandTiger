@@ -38,6 +38,8 @@ void pacman_clear(void) {
     extern int offset_x;  // Usa l'offset globale definito in labyrinth.c
     extern int offset_y;
 
+		int i, j;
+	
     int pixel_x = offset_x + pacman_x * CELL_SIZE + CELL_SIZE / 2; // Centrato sulla cella
     int pixel_y = offset_y + pacman_y * CELL_SIZE + CELL_SIZE / 2;
 
@@ -136,3 +138,4 @@ void pacman_update(void) {
 void pacman_set_direction(int new_direction) {
     pacman_desired_direction = new_direction;
 }
+

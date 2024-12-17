@@ -13,8 +13,10 @@
 
 // Definizioni
 #define CELL_SIZE 8
+
+#define Orange 0xFD20  // Definizione colore RGB565 Arancione
 #define WALL_COLOR Blue
-#define PILL_COLOR Yellow
+#define PILL_COLOR Orange
 #define POWER_PILL_COLOR Red
 #define EMPTY_COLOR Black
 
