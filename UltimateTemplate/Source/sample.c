@@ -126,10 +126,10 @@ int main(void)
 	//init_timer(nr.timer, prescaler, nr.match.register MRnum, SRI (stop reset interrupt), timerInterval del match register)
 	init_timer(0, 0, 0, 3, 0x017D7840); 	// Timer0 inizializzazione con periodo 1 sec
 	//funct(nr timer da abilitare)
-	enable_timer(0);
+	//enable_timer(0);
 	
 	init_timer(1, 0, 0, 3, 0x017D7840); 	// Timer0 inizializzazione con periodo 1 sec
-	enable_timer(1);
+	//enable_timer(1);
 	
 	LPC_SC->PCON |= 0x1;									/* power-down	mode										*/
 	LPC_SC->PCON &= ~(0x2);

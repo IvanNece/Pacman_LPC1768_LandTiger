@@ -41,6 +41,9 @@ extern char led_value;
 //VARIABILE GLOBALE DI PAUSA DEL GIOCO
 volatile int game_paused = 0; // 0: Pausa disattiva all'avvio
 
+//VARIABILE TIMER ABILITATI
+static int timers_enabled = 0; // Flag per controllare se i timer sono stati attivati
+
 // Questa è la ISR associata al timer RIT. Ogni volta che il timer scade, questa funzione viene eseguita.
 void RIT_IRQHandler (void)
 {					
@@ -53,6 +56,20 @@ void RIT_IRQHandler (void)
 	
 /* JOYSTICK MANAGEMENT ******************************************************************************************************************************************************************/
 	//Gestione del joystick, Il codice verifica lo stato dei pin GPIO associati ai movimenti del joystick. Ogni direzione è associata a un bit specifico dei registri GPIO.
+	
+	
+	if((LPC_GPIO1->FIOPIN & (1<<25)) == 0 || // J_Select
+    (LPC_GPIO1->FIOPIN & (1<<26)) == 0 || // J_Down
+    (LPC_GPIO1->FIOPIN & (1<<27)) == 0 || // J_Left
+    (LPC_GPIO1->FIOPIN & (1<<28)) == 0 || // J_Right
+    (LPC_GPIO1->FIOPIN & (1<<29)) == 0)   // J_Up 
+	{   
+    if (timers_enabled == 0) {
+        enable_timer(0); // Abilita il Timer0
+        enable_timer(1); // Abilita il Timer1
+        timers_enabled = 1; // Setta la flag per non eseguire più questa parte
+    }
+	}
 	
 	// Legge il valore del registro dei pin GPI01 e controllare il 25 bit associato al movimento J-Select, ==0 vuol dire premuto
 	if((LPC_GPIO1->FIOPIN & (1<<25)) == 0){	
