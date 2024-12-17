@@ -124,7 +124,7 @@ int main(void)
 	LCD_Clear(Black); 
 	
 	//init_timer(nr.timer, prescaler, nr.match.register MRnum, SRI (stop reset interrupt), timerInterval del match register)
-	init_timer(0, 0, 0, 3, 0x017D7840); 	// Timer0 inizializzazione con periodo 1 sec
+	init_timer(0, 0, 0, 3, 0x2FAF08); 	// Timer0 inizializzazione con periodo 0,125 sec
 	//funct(nr timer da abilitare)
 	//enable_timer(0);
 	

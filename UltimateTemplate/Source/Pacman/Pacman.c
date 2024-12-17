@@ -8,6 +8,8 @@ int pacman_y;
 int pacman_direction;
 int pacman_desired_direction = STOP;
 
+// Aggiungi una variabile statica per tracciare l'ultima soglia di punteggio
+static int score_threshold = 0;
 
 extern volatile int game_paused;
 extern int labyrinth[HEIGHT][WIDTH];
@@ -114,6 +116,14 @@ void pacman_update(void) {
             score += 50;
             labyrinth[pacman_y][pacman_x] = EMPTY; // Rimuove la power pill
             display_score();
+        }
+				
+				
+				// **Controllo per aggiungere una vita ogni 1000 punti**
+        if (score >= score_threshold + 1000) {
+            lives++;
+            score_threshold += 1000;  // Aggiorna il punteggio della soglia
+            display_lives();          // Aggiorna la visualizzazione delle vite
         }
 			
     } else {

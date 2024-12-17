@@ -97,19 +97,29 @@ void display_game_info(void) {
     LCD_Clear(BACKGROUND_COLOR);
 
     // Mostra il countdown timer in alto a sinistra
+		//disable_RIT();
     GUI_Text(10, 10, (uint8_t *)"TIMER:", TEXT_COLOR, BACKGROUND_COLOR);
+		//enable_RIT();
     char timer_str[10];
     sprintf(timer_str, "%02d", countdown);
+		//disable_RIT();
     GUI_Text(70, 10, (uint8_t *)timer_str, TEXT_COLOR, BACKGROUND_COLOR);
+		//enable_RIT();
 
     // Mostra lo score in alto a destra
+		//disable_RIT();
     GUI_Text(140, 10, (uint8_t *)"SCORE:", TEXT_COLOR, BACKGROUND_COLOR);
+		//enable_RIT();
     char score_str[10];
     sprintf(score_str, "%d", 0);
+		//disable_RIT();
     GUI_Text(210, 10, (uint8_t *)score_str, TEXT_COLOR, BACKGROUND_COLOR);
+		//enable_RIT();
 
     // Mostra le vite rimanenti in basso
+		//disable_RIT();
     GUI_Text(10, 300, (uint8_t *)"LIVES:", TEXT_COLOR, BACKGROUND_COLOR);
+		//enable_RIT();
     for (i = 0; i < lives; i++) {
         // Disegna l'icona Pac-Man per ogni vita
         draw_pacman_icon(70 + (i * 20), 310, 8, Yellow);  // Posizione centrata, raggio 8
@@ -121,8 +131,10 @@ void display_timer(void) {
     sprintf(timer_str, "%02d", countdown); // Converte il valore in stringa
 
     // Cancella la vecchia scritta e mostra il nuovo countdown
+		disable_RIT();
     GUI_Text(70, 10, (uint8_t *)"    ", TEXT_COLOR, BACKGROUND_COLOR); // Pulisce l'area
     GUI_Text(70, 10, (uint8_t *)timer_str, TEXT_COLOR, BACKGROUND_COLOR);
+		enable_RIT();
 }
 
 void display_score(void) {
@@ -135,6 +147,25 @@ void display_score(void) {
     // Mostra lo score aggiornato
     //GUI_Text(210, 10, (uint8_t *)"SCORE:", TEXT_COLOR, BACKGROUND_COLOR);
 		disable_RIT();
-    GUI_Text(210, 10, (uint8_t *)score_str, TEXT_COLOR, BACKGROUND_COLOR);
+    GUI_Text(190, 10, (uint8_t *)score_str, TEXT_COLOR, BACKGROUND_COLOR);
 		enable_RIT();
+	
+		/*Il disable_RIT() e enable_RIT() intorno a GUI_Text garantiscono che la funzione di aggiornamento del display non
+  	interferisca con il timer ripetitivo. Questo è fondamentale per evitare "flickering" sul display.*/
+}
+
+void display_lives(void) {
+    int i;
+		
+		disable_RIT();
+    //Cancella l'area delle vite
+    LCD_ClearWindow(70, 300, 100, 20, BACKGROUND_COLOR);
+		enable_RIT();
+
+    // Disegna le vite aggiornate
+    for (i = 0; i < lives; i++) {
+			
+        draw_pacman_icon(70 + (i * 20), 310, 8, PACMAN_COLOR);
+				
+    }
 }

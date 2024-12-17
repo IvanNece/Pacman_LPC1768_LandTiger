@@ -23,11 +23,14 @@
 
 #define TEXT_COLOR White
 #define BACKGROUND_COLOR Black
-#define START_LIVES 3
+#define START_LIVES 1
 #define PI 3.14159
+
+#define PACMAN_COLOR Yellow
 
 extern int countdown;
 extern int score;
+extern int lives;
 
 // Dichiarazione del labirinto
 //extern int labyrinth[HEIGHT][WIDTH];
@@ -40,5 +43,6 @@ void draw_pacman_icon(int x, int y, int radius, uint16_t color);
 void display_game_info(void);
 void display_timer(void);
 void display_score(void);
+void display_lives(void);
 
 #endif
