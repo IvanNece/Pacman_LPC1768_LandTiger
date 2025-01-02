@@ -128,8 +128,13 @@ int main(void)
 	//funct(nr timer da abilitare)
 	//enable_timer(0);
 	
-	init_timer(1, 0, 0, 3, 0x017D7840); 	// Timer0 inizializzazione con periodo 1 sec
+	init_timer(1, 0, 0, 3, 0x017D7840); 	// Timer1 inizializzazione con periodo 1 sec
 	//enable_timer(1);
+	
+	init_timer(2, 0, 0, 3, 0x017D7840); 	// Timer2 inizializzazione con periodo 1 sec
+	//enable_timer(2)
+	
+	//l'abilitazione dei timer è fatta nel IRQ_RIT.c
 	
 	LPC_SC->PCON |= 0x1;									/* power-down	mode										*/
 	LPC_SC->PCON &= ~(0x2);

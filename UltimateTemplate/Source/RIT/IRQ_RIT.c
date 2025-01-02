@@ -67,6 +67,7 @@ void RIT_IRQHandler (void)
     if (timers_enabled == 0) {
         enable_timer(0); // Abilita il Timer0
         enable_timer(1); // Abilita il Timer1
+				enable_timer(2);
         timers_enabled = 1; // Setta la flag per non eseguire più questa parte
     }
 	}

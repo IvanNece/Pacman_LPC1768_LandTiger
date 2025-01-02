@@ -13,6 +13,7 @@ static int score_threshold = 0;
 
 extern volatile int game_paused;
 extern int labyrinth[HEIGHT][WIDTH];
+extern int next_power_pill_score;
 
 // Funzione per inizializzare Pac-Man
 void pacman_init(void) {
@@ -130,6 +131,12 @@ void pacman_update(void) {
 			
     } else {
         return; 
+    }
+		
+		// Controlla se lo score ha raggiunto la soglia per generare una Power Pill
+    if (score >= next_power_pill_score && power_pills_generated < 6) {
+        generate_power_pills();  // Genera una nuova Power Pill
+        next_power_pill_score += 100; // Incrementa la soglia per la prossima Power Pill
     }
 }
 

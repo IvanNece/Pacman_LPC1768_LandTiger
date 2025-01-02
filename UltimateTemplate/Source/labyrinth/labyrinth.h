@@ -33,6 +33,10 @@
 extern int countdown;
 extern int score;
 extern int lives;
+extern int power_pills_generated; 
+extern int labyrinth[HEIGHT][WIDTH];
+
+
 
 // Dichiarazione del labirinto
 //extern int labyrinth[HEIGHT][WIDTH];
@@ -46,5 +50,6 @@ void display_game_info(void);
 void display_timer(void);
 void display_score(void);
 void display_lives(void);
+void generate_power_pills(void);
 
 #endif

@@ -8,6 +8,11 @@ int score = 0;
 int countdown = 60;  // Countdown iniziale a 60 secondi
 int lives = START_LIVES;
 
+int power_pills_generated = 0; // 0 = non generate, 1 = già generate
+int next_power_pill_score = 350; // Prima soglia per generare una Power Pill
+
+
+
 int offset_x = (240 - WIDTH * CELL_SIZE) / 2;    // Offset orizzontale centrato
 int offset_y = (320 - HEIGHT * CELL_SIZE) / 2;   // Offset verticale centrato
 
@@ -186,3 +191,49 @@ void display_lives(void) {
 				
     }
 }
+
+
+
+void generate_power_pills(void) {
+	/*
+		Keil gestisce la memoria in modo particolare, e l'uso di variabili locali non static in funzioni 
+	  che vengono richiamate frequentemente può portare a problemi di overflow dello stack o accesso non valido
+	*/
+    static int standard_pills[240][2] = {{0}}; // Array per salvare le coordinate delle pillole standard
+    int total_standard_pills = 0;
+    int i, j;
+
+    // Scansiona la matrice per trovare tutte le pillole standard
+    for (i = 0; i < HEIGHT; i++) {
+        for (j = 0; j < WIDTH; j++) {
+            if (labyrinth[i][j] == STANDARD_PILL) {
+                standard_pills[total_standard_pills][0] = i; // Salva la coordinata Y
+                standard_pills[total_standard_pills][1] = j; // Salva la coordinata X
+                total_standard_pills++;
+            }
+        }
+    }
+
+    // Se non ci sono pillole standard, termina
+    if (total_standard_pills == 0) {
+        return;
+    }
+
+    // Inizializza il generatore casuale
+    srand(score + LPC_TIM1->TC);
+
+    // Scegli una posizione casuale per la Power Pill
+    int random_index = rand() % total_standard_pills;
+    int y = standard_pills[random_index][0];
+    int x = standard_pills[random_index][1];
+
+    labyrinth[y][x] = POWER_PILL; // Sostituisci la pillola standard con una Power Pill
+
+    // Ridisegna il labirinto
+		disable_RIT();
+    draw_labyrinth(labyrinth);
+		enable_RIT();
+
+    power_pills_generated++; // Incrementa il conteggio delle Power Pills generate
+}
+
