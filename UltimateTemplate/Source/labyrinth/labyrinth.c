@@ -195,45 +195,27 @@ void display_lives(void) {
 
 
 void generate_power_pills(void) {
-	/*
-		Keil gestisce la memoria in modo particolare, e l'uso di variabili locali non static in funzioni 
-	  che vengono richiamate frequentemente può portare a problemi di overflow dello stack o accesso non valido
-	*/
-    static int standard_pills[240][2] = {{0}}; // Array per salvare le coordinate delle pillole standard
-    int total_standard_pills = 0;
-    int i, j;
+	  disable_RIT();
+	
+    int x, y, attempts;
 
-    // Scansiona la matrice per trovare tutte le pillole standard
-    for (i = 0; i < HEIGHT; i++) {
-        for (j = 0; j < WIDTH; j++) {
-            if (labyrinth[i][j] == STANDARD_PILL) {
-                standard_pills[total_standard_pills][0] = i; // Salva la coordinata Y
-                standard_pills[total_standard_pills][1] = j; // Salva la coordinata X
-                total_standard_pills++;
-            }
+    // Inizializza il generatore casuale con uno seed basato sullo score e il timer
+    srand(score + LPC_TIM2->TC);
+
+    // Trova una posizione valida casualmente
+    for (attempts = 0; attempts < 100; attempts++) { // Limita il numero di tentativi
+        x = rand() % WIDTH;
+        y = rand() % HEIGHT;
+
+        if (labyrinth[y][x] == STANDARD_PILL) {
+            labyrinth[y][x] = POWER_PILL; // Sostituisci la pillola standard con una Power Pill
+            draw_labyrinth(labyrinth);   // Ridisegna solo quando troviamo una posizione valida
+            power_pills_generated++;    // Incrementa il conteggio delle Power Pills generate
+            return;                     // Esci dalla funzione dopo aver generato la Power Pill
         }
     }
-
-    // Se non ci sono pillole standard, termina
-    if (total_standard_pills == 0) {
-        return;
-    }
-
-    // Inizializza il generatore casuale
-    srand(score + LPC_TIM1->TC);
-
-    // Scegli una posizione casuale per la Power Pill
-    int random_index = rand() % total_standard_pills;
-    int y = standard_pills[random_index][0];
-    int x = standard_pills[random_index][1];
-
-    labyrinth[y][x] = POWER_PILL; // Sostituisci la pillola standard con una Power Pill
-
-    // Ridisegna il labirinto
-		disable_RIT();
-    draw_labyrinth(labyrinth);
+		
 		enable_RIT();
-
-    power_pills_generated++; // Incrementa il conteggio delle Power Pills generate
 }
+
 

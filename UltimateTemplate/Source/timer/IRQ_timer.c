@@ -34,6 +34,9 @@ Ogni timer ha 4 Match Register (MR0, MR1, MR2, MR3) che possono essere configura
 ** Returned value:		None
 **
 ******************************************************************************/
+
+extern int next_power_pill_score;
+
 extern unsigned char led_value;					/* defined in funct_led								*/
 void TIMER0_IRQHandler (void)
 {
@@ -91,6 +94,11 @@ void TIMER1_IRQHandler (void)
 		if(countdown > 0){
 			countdown--;
 			
+		if (score >= next_power_pill_score && power_pills_generated < 6) {
+				generate_power_pills();  // Genera una nuova Power Pill
+				next_power_pill_score += 100; // Incrementa la soglia per la prossima Power Pill
+		}
+			
 			// Aggiorna il display con il nuovo valore del timer
 			display_timer();
 		}
@@ -142,6 +150,13 @@ void TIMER2_IRQHandler (void)
             generate_power_pills();
         }
     }*/
+		
+		/*
+		if (score >= next_power_pill_score && power_pills_generated < 6) {
+				generate_power_pills();  // Genera una nuova Power Pill
+				next_power_pill_score += 100; // Incrementa la soglia per la prossima Power Pill
+		}
+		*/
 			
 		LPC_TIM2->IR = 1;			/* clear interrupt flag */
 	}
