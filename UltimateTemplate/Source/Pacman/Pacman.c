@@ -129,13 +129,10 @@ void pacman_update(void) {
             display_lives();          // Aggiorna la visualizzazione delle vite
         }
 				
-				/*
-				// Controlla se lo score ha raggiunto la soglia per generare una Power Pill
 				if (score >= next_power_pill_score && power_pills_generated < 6) {
-						generate_power_pills();  // Genera una nuova Power Pill
-						next_power_pill_score += 100; // Incrementa la soglia per la prossima Power Pill
+					generate_power_pills();  // Genera una nuova Power Pill
+					next_power_pill_score += 100; // Incrementa la soglia per la prossima Power Pill
 				}
-				*/
 			
     } else {
         return; 

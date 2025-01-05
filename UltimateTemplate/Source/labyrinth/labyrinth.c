@@ -195,12 +195,10 @@ void display_lives(void) {
 
 
 void generate_power_pills(void) {
-	  disable_RIT();
-	
-    int x, y, attempts;
+    int x, y, attempts, px, py;
 
-    // Inizializza il generatore casuale con uno seed basato sullo score e il timer
-    srand(score + LPC_TIM2->TC);
+    // Inizializza il generatore casuale con un seed basato sullo score e il timer
+    srand(score + LPC_TIM0->TC);
 
     // Trova una posizione valida casualmente
     for (attempts = 0; attempts < 100; attempts++) { // Limita il numero di tentativi
@@ -209,13 +207,27 @@ void generate_power_pills(void) {
 
         if (labyrinth[y][x] == STANDARD_PILL) {
             labyrinth[y][x] = POWER_PILL; // Sostituisci la pillola standard con una Power Pill
-            draw_labyrinth(labyrinth);   // Ridisegna solo quando troviamo una posizione valida
-            power_pills_generated++;    // Incrementa il conteggio delle Power Pills generate
-            return;                     // Esci dalla funzione dopo aver generato la Power Pill
+
+            // Calcola la posizione del pixel per la cella interessata
+            int pixel_x = offset_x + x * CELL_SIZE + CELL_SIZE / 2;
+            int pixel_y = offset_y + y * CELL_SIZE + CELL_SIZE / 2;
+
+            // Disegna la nuova Power Pill direttamente
+            for (px = -3; px <= 3; px++) {
+                for (py = -3; py <= 3; py++) {
+                    if (px * px + py * py <= 9) { // Condizione per rimanere nel cerchio
+												disable_RIT();
+                        LCD_SetPoint(pixel_x + px, pixel_y + py, POWER_PILL_COLOR);
+												enable_RIT();
+                    }
+                }
+            }
+
+            power_pills_generated++; // Incrementa il conteggio delle Power Pills generate
+            return;                  // Esci dalla funzione dopo aver generato la Power Pill
         }
     }
-		
-		enable_RIT();
 }
+
 
 

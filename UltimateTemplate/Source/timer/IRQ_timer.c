@@ -94,10 +94,12 @@ void TIMER1_IRQHandler (void)
 		if(countdown > 0){
 			countdown--;
 			
+		/*
 		if (score >= next_power_pill_score && power_pills_generated < 6) {
 				generate_power_pills();  // Genera una nuova Power Pill
 				next_power_pill_score += 100; // Incrementa la soglia per la prossima Power Pill
 		}
+		*/
 			
 			// Aggiorna il display con il nuovo valore del timer
 			display_timer();
@@ -143,13 +145,15 @@ void TIMER2_IRQHandler (void)
   /* Match register 0 interrupt service routine */
 	if (LPC_TIM2->IR & 01)
 	{
+		/*
 		// Controlla se è il momento di generare le Power Pills
-    /*if (countdown <= 50 && countdown > 20 && !power_pills_generated) {
+    if (countdown <= 50 && countdown > 20 && !power_pills_generated) {
 				// Usa il tempo e lo score per una probabilità casuale
         if ((LPC_TIM1->TC + score) % (50 - countdown + 1) == 0) { // Probabilità crescente
             generate_power_pills();
         }
-    }*/
+    }
+		*/
 		
 		/*
 		if (score >= next_power_pill_score && power_pills_generated < 6) {
@@ -157,6 +161,14 @@ void TIMER2_IRQHandler (void)
 				next_power_pill_score += 100; // Incrementa la soglia per la prossima Power Pill
 		}
 		*/
+		
+		/*
+		if (score >= next_power_pill_score && power_pills_generated < 6) {
+				generate_power_pills();  // Genera una nuova Power Pill
+				next_power_pill_score += 100; // Incrementa la soglia per la prossima Power Pill
+		}
+		*/
+		
 			
 		LPC_TIM2->IR = 1;			/* clear interrupt flag */
 	}
