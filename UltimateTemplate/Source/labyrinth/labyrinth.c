@@ -230,4 +230,43 @@ void generate_power_pills(void) {
 }
 
 
+void check_game_status(void) {
+    int i, j;
+    int remaining_pills = 0;
+
+    // Controlla se ci sono ancora pillole nel labirinto
+    for (i = 0; i < HEIGHT; i++) {
+        for (j = 0; j < WIDTH; j++) {
+            if (labyrinth[i][j] == STANDARD_PILL || labyrinth[i][j] == POWER_PILL) {
+                remaining_pills++;
+            }
+        }
+    }
+
+    // Coordinate centrali del labirinto
+    int center_x = offset_x + (224 / 2);
+    int center_y = offset_y + (248 / 2);
+
+    if (remaining_pills == 0) {
+        // Vittoria
+        disable_RIT();
+				disable_timer(0);
+				disable_timer(1);
+        GUI_Text(center_x - 32, center_y, (uint8_t *)"Victory!", White, Black); // 64 pixel di larghezza testo
+        return;
+    }
+
+    if (countdown == 0) {
+        // Game Over
+        disable_RIT();
+				disable_timer(0);
+				disable_timer(1);
+        GUI_Text(center_x - 40, center_y, (uint8_t *)"Game Over!", Red, Black); // 80 pixel di larghezza testo
+        return;
+    }
+}
+
+
+
+
 

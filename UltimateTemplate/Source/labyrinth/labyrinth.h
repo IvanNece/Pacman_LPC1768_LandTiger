@@ -51,5 +51,6 @@ void display_timer(void);
 void display_score(void);
 void display_lives(void);
 void generate_power_pills(void);
+void check_game_status(void);
 
 #endif
