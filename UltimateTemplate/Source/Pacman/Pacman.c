@@ -138,6 +138,7 @@ void pacman_update(void) {
         return; 
     }
 		
+		check_game_status();
 
 }
 

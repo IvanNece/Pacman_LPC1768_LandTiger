@@ -182,9 +182,13 @@ void RIT_IRQHandler (void)
 						  disable_RIT();
 							GUI_Text_Narrow(103, 148, (uint8_t *)"PAUSE", White, Black);
 							enable_RIT();
+							disable_timer(0);
+							disable_timer(1);
 					} else {
 							// Cancella il messaggio PAUSE con un rettangolo più stretto
 							LCD_ClearWindow(103, 148, 35, 15, Black); // Rettangolo più piccolo
+							enable_timer(0);
+							enable_timer(1);
 					}
 					break;
 				default:

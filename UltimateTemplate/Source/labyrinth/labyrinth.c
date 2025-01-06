@@ -250,9 +250,9 @@ void check_game_status(void) {
     if (remaining_pills == 0) {
         // Vittoria
         disable_RIT();
+				GUI_Text(center_x - 32, center_y, (uint8_t *)"Victory!", White, Black); // 64 pixel di larghezza testo
 				disable_timer(0);
 				disable_timer(1);
-        GUI_Text(center_x - 32, center_y, (uint8_t *)"Victory!", White, Black); // 64 pixel di larghezza testo
         return;
     }
 

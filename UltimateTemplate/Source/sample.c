@@ -3,20 +3,20 @@
 **                                 http://www.powermcu.com
 **
 **--------------File Info---------------------------------------------------------------------------------
-** File name:               main.c
-** Descriptions:            The GLCD application function
+** File name:               
+** Descriptions:            
 **
 **--------------------------------------------------------------------------------------------------------
-** Created by:              AVRman
-** Created date:            2010-11-7
-** Version:                 v1.0
-** Descriptions:            The original version
+** Created by:             
+** Created date:            
+** Version:                 
+** Descriptions:            
 **
 **--------------------------------------------------------------------------------------------------------
-** Modified by:             Paolo Bernardi
-** Modified date:           03/01/2020
-** Version:                 v2.0
-** Descriptions:            basic program for LCD and Touch Panel teaching
+** Modified by:             
+** Modified date:           
+** Version:                 
+** Descriptions:            
 **
 *********************************************************************************************************/
 

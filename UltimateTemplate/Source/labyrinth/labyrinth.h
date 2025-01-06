@@ -20,9 +20,6 @@
 #define POWER_PILL_COLOR Red
 #define EMPTY_COLOR Black
 
-#define WIDTH 28 // Numero di celle in larghezza
-#define HEIGHT 31 // Numero di celle in altezza
-
 #define TEXT_COLOR White
 #define BACKGROUND_COLOR Black
 #define START_LIVES 1
